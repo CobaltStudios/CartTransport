@@ -29,6 +29,7 @@ public class TransportCart {
     private UUID myId;
     private Minecart myCart;
     private Entity myRider;
+    private boolean isReady;
     
     public TransportCart(Minecart mc) {
         myCart = mc;
@@ -37,11 +38,27 @@ public class TransportCart {
         initialize();
     }
     
+    public TransportCart(Location loc) {
+        myCart = loc.getWorld().spawn(loc, Minecart.class);
+        initialize();
+    }
+    
     public TransportCart(Player p, Location loc) {
         myRider = p;
         myCart = loc.getWorld().spawn(loc, Minecart.class);
         myId = null;
         initialize();
+    }
+    
+    /**
+     * Prepare the TransportCart before use
+     */
+    private void initialize() {
+        myId = CartManager.registerCart(this);
+        if(myCart == null || myRider == null)
+            isReady = false;
+        else
+            isReady = true;
     }
     
     /**
