@@ -1,0 +1,3 @@
+name: CartTransport
+main: com.cobalt.hightidez.carttransport.CartTransport
+version: {$VersionNumber}
