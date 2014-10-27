@@ -43,4 +43,12 @@ public class TransportCart {
         myId = null;
         initialize();
     }
+    
+    /**
+     * Returns the unique id of the TransportCart
+     * @return 
+     */
+    public UUID getId() {
+        return myId;
+    }
 }

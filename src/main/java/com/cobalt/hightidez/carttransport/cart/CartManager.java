@@ -19,6 +19,12 @@ public class CartManager implements Listener {
         
     }
     
+    /**
+     * Registers a new instance of a TransportCart in a static
+     * HashMap field for storage purposes
+     * @param cart
+     * @return 
+     */
     public static UUID registerCart(TransportCart cart) {
         UUID currentId = UUID.nameUUIDFromBytes(cart.toString().getBytes());
         if(myRegisteredCarts.containsKey(currentId))
@@ -27,12 +33,28 @@ public class CartManager implements Listener {
         return currentId;
     }
     
+    /**
+     * Unregister the TransportCart from existence, uses the cart
+     * to call parent method which does the actual erasing
+     * @param cart
+     * @return 
+     */
     public static boolean unregisterCart(TransportCart cart) {
-        unregisterCart(cart.getId());
+        return unregisterCart(cart.getId());
     }
     
+    /**
+     * Unregister the TransportCart from existence, uses each
+     * carts Unique ID to scan and erase from the HashMap
+     * @param id
+     * @return 
+     */
     public static boolean unregisterCart(UUID id) {
-        
+        if(myRegisteredCarts.containsKey(id)) {
+            myRegisteredCarts.remove(id);
+            return true;
+        } else
+            return false;
     }
     
 }
